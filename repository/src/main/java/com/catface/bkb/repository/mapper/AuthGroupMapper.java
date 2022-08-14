@@ -20,10 +20,14 @@ public interface AuthGroupMapper extends BaseMapper<AuthGroup> {
     /**
      * 根据可见性,客户ID,以及parent查询下一级的权限组
      *
-     * @param visibility 可见性
-     * @param clientId   客户ID
-     * @param parentId   父级权限组的ID
+     * @param visibility  可见性
+     * @param bizDomainId 所属业务域ID
+     * @param clientId    客户ID
+     * @param parentId    父级权限组的ID
      * @return 下一级的权限组
      */
-    List<AuthGroup> selectChildren(@Param("visibility") VisibilityEnum visibility, @Param("clientId") Long clientId, @Param("parentId") Long parentId);
+    List<AuthGroup> selectChildren(@Param("visibility") VisibilityEnum visibility,
+                                   @Param("bizDomainId") Long bizDomainId,
+                                   @Param("clientId") Long clientId,
+                                   @Param("parentId") Long parentId);
 }

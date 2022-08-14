@@ -41,6 +41,9 @@ public class UserToRole implements Serializable {
     @ApiModelProperty(value = "角色ID")
     private Long roleId;
 
+    @ApiModelProperty(value = "创建人")
+    private Long creator;
+
     @ApiModelProperty(value = "创建时间")
     private Date created;
 

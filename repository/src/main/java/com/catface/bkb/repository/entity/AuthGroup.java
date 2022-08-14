@@ -45,6 +45,12 @@ public class AuthGroup implements Serializable {
     @ApiModelProperty(value = "所属客户ID")
     private Long clientId;
 
+    @ApiModelProperty(value = "创建人")
+    private Long creator;
+
+    @ApiModelProperty(value = "修改人")
+    private Long modifier;
+
     @ApiModelProperty(value = "创建时间")
     private Date created;
 
