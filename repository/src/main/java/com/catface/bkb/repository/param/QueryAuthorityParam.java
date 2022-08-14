@@ -2,6 +2,7 @@ package com.catface.bkb.repository.param;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.common.enums.AuthorityTypeEnum;
+import com.catface.bkb.common.enums.VisibilityEnum;
 import com.catface.bkb.repository.entity.Authority;
 import com.catface.bkb.repository.entity.exd.AuthorityExd;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,4 +31,7 @@ public class QueryAuthorityParam extends Page<AuthorityExd> {
 
     @ApiModelProperty(value = "请求路径")
     private String url;
+
+    @ApiModelProperty(value = "可见性")
+    private VisibilityEnum visibility;
 }

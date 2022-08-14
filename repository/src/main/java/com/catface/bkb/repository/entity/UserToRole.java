@@ -35,6 +35,9 @@ public class UserToRole implements Serializable {
     @ApiModelProperty(value = "用户ID")
     private Long userId;
 
+    @ApiModelProperty(value = "客户ID")
+    private Long clientId;
+
     @ApiModelProperty(value = "角色ID")
     private Long roleId;
 

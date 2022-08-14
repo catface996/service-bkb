@@ -5,6 +5,8 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+
+import com.catface.bkb.common.enums.VisibilityEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -34,6 +36,12 @@ public class Role implements Serializable {
 
     @ApiModelProperty(value = "角色名称")
     private String roleName;
+
+    @ApiModelProperty(value = "可见性")
+    private VisibilityEnum visibility;
+
+    @ApiModelProperty(value = "所属客户ID")
+    private Long clientId;
 
     @ApiModelProperty(value = "创建时间")
     private Date created;

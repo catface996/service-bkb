@@ -5,7 +5,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id
-        , authority_name, authority_type, biz_service_id, url, biz_domain_id, created, updated, remark
+        , authority_name, authority_type, biz_service_id, url, biz_domain_id, visibility, created, updated, remark
     </sql>
 
     <!-- 分页查询权限点 -->
@@ -44,6 +44,7 @@
         <if test="param.url!=null and param.url!=''">
             and url like concat('%',#{param.url},'%')
         </if>
+        and visibility = #{param.visibility}
     </select>
 
 </mapper>

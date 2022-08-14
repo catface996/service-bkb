@@ -4,7 +4,12 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, parent_id, group_name, biz_domain_id, created, updated, remark
+        id, parent_id, group_name, biz_domain_id,visibility, client_id, created, updated, remark
     </sql>
+
+    <!-- 根据可见性,客户ID,以及parent查询下一级的权限组 -->
+    <select id="selectChildren" resultType="com.catface.bkb.repository.entity.AuthGroup">
+
+    </select>
 
 </mapper>

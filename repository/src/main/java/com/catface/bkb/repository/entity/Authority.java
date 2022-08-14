@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 
 import com.catface.bkb.common.enums.AuthorityTypeEnum;
+import com.catface.bkb.common.enums.VisibilityEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -45,6 +46,9 @@ public class Authority implements Serializable {
 
     @ApiModelProperty(value = "所属业务域编码")
     private Long bizDomainId;
+
+    @ApiModelProperty(value = "可见性")
+    private VisibilityEnum visibility;
 
     @ApiModelProperty(value = "创建时间")
     private Date created;
