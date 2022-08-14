@@ -1,27 +1,18 @@
-package com.catface.bkb.repository.entity;
+package com.catface.bkb.http.web.controller.service.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
- * 业务系统
- * </p>
- *
  * @author catface
- * @since 2022-08-14
+ * @since 2022/8/14
  */
+@ApiModel(description = "业务系统模型")
 @Data
-@EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "BizService对象", description = "业务系统")
-public class BizService implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class BizServiceResponse {
 
     @ApiModelProperty(value = "主键")
     private Long id;
@@ -43,6 +34,4 @@ public class BizService implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String remark;
-
-
 }

@@ -20,5 +20,9 @@ public class SwaggerTagConst {
 
     public static final String USER_TO_ROLE = "用户和角色";
 
+    public static final String BIZ_DOMAIN = "业务域";
+
+    public static final String BIZ_SERVICE = "业务系统";
+
 
 }
