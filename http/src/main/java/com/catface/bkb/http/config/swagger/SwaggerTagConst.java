@@ -12,5 +12,13 @@ public class SwaggerTagConst {
 
     public static final String SAY_HELLO = "打招呼";
 
+    public static final String AUTHORITY = "权限点";
+
+    public static final String AUTH_GROUP = "权限组";
+
+    public static final String ROLE = "角色";
+
+    public static final String USER_TO_ROLE = "用户和角色";
+
 
 }

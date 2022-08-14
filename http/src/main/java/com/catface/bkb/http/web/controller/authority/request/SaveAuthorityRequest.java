@@ -1,37 +1,24 @@
-package com.catface.bkb.repository.entity;
+package com.catface.bkb.http.web.controller.authority.request;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-
 import com.catface.bkb.common.enums.AuthorityTypeEnum;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import java.util.Date;
 
 /**
- * <p>
- * 权限点
- * </p>
- *
  * @author catface
- * @since 2022-08-14
+ * @since 2022/8/14
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@ApiModel(value="Authority对象", description="权限点")
-public class Authority implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SaveAuthorityRequest {
 
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty(value = "权限点名称")
+    @ApiModelProperty(value = "权限点名称",required = true,example = "新增用户")
     private String authorityName;
 
     @ApiModelProperty(value = "权限点类型： 查询类和操作类;")
@@ -57,6 +44,4 @@ public class Authority implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String remark;
-
-
 }
