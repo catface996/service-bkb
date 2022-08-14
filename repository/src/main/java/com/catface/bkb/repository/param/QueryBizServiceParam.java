@@ -2,6 +2,7 @@ package com.catface.bkb.repository.param;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.repository.entity.BizService;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -11,7 +12,9 @@ import lombok.Data;
 @Data
 public class QueryBizServiceParam extends Page<BizService> {
 
-    private String serviceName;
+    @ApiModelProperty(value = "业务系统名称")
+    private String bizServiceName;
 
-    private String serviceCode;
+    @ApiModelProperty(value = "业务系统名称")
+    private String bizServiceCode;
 }

@@ -4,7 +4,46 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, authority_name, authority_type, service_code, service_name, url, biz_domain_id, created, updated, remark
+        id
+        , authority_name, authority_type, biz_service_id, url, biz_domain_id, created, updated, remark
     </sql>
+
+    <!-- 分页查询权限点 -->
+    <select id="selectOnePage" resultType="com.catface.bkb.repository.entity.exd.AuthorityExd">
+        select
+        a.id as id,
+        a.authority_name as authorityName,
+        a.authority_type as authorityType,
+        a.biz_service_id as bizServiceId,
+        bs.biz_service_name as bizServiceName,
+        a.biz_domain_id as bizDomainId,
+        bd.biz_domain_name as bizDomainName,
+        a.url as url,
+        a.created as created,
+        a.updated as updated,
+        a.remark as remark
+        from authority a
+            left join biz_service bs on a.biz_service_id = bs.id
+            left join biz_domain bd on a.biz_domain_id = bd.id
+        where 1=1
+        <if test="param.bizDomainId!=null">
+            and biz_domain_id = #{param.bizDomainId}
+        </if>
+        <if test="param.bizServiceId!=null">
+            and biz_service_id = #{param.bizServiceId}
+        </if>
+        <if test="param.authorityName!=null and param.authorityName!=''">
+            and authority_name like concat('%',#{param.authorityName},'%')
+        </if>
+        <if test="param.authorityTypes!=null and param.authorityTypes.size()>0">
+            and authority_type in
+            <foreach collection="param.authorityTypes" open="(" separator="," close=")" index="index" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="param.url!=null and param.url!=''">
+            and url like concat('%',#{param.url},'%')
+        </if>
+    </select>
 
 </mapper>

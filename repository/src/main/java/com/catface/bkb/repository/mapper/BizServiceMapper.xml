@@ -5,7 +5,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id
-        , service_name, service_code, auth_endpoint, created, updated, remark
+        , biz_service_name, biz_service_code, auth_endpoint, created, updated, remark
     </sql>
 
     <!-- 分页查询业务系统 -->
@@ -14,11 +14,11 @@
         <include refid="Base_Column_List"/>
         from biz_service
         where 1=1
-        <if test="param.serviceName!=null and param.serviceName!=''">
-            and service_name like concat('%',#{param.serviceName},'%')
+        <if test="param.bizServiceName!=null and param.bizServiceName!=''">
+            and biz_service_name like concat('%',#{param.bizServiceName},'%')
         </if>
-        <if test="param.serviceCode!=null and param.serviceCode!=''">
-            and service_code like concat('%',#{param.serviceCode},'%')
+        <if test="param.bizServiceCode!=null and param.bizServiceCode!=''">
+            and biz_service_code like concat('%',#{param.bizServiceCode},'%')
         </if>
     </select>
 

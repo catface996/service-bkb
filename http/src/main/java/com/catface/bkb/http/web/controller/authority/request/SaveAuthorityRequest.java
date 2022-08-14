@@ -24,23 +24,14 @@ public class SaveAuthorityRequest {
     @ApiModelProperty(value = "权限点类型： 查询类和操作类;")
     private AuthorityTypeEnum authorityType;
 
-    @ApiModelProperty(value = "所属业务系统编码")
-    private String serviceCode;
-
-    @ApiModelProperty(value = "所属业务系统")
-    private String serviceName;
-
     @ApiModelProperty(value = "权限点URL")
     private String url;
 
+    @ApiModelProperty(value = "所属业务系统编码")
+    private Long bizServiceId;
+
     @ApiModelProperty(value = "所属业务域编码")
     private Long bizDomainId;
-
-    @ApiModelProperty(value = "创建时间")
-    private Date created;
-
-    @ApiModelProperty(value = "修改时间")
-    private Date updated;
 
     @ApiModelProperty(value = "备注")
     private String remark;

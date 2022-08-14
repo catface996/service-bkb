@@ -14,8 +14,8 @@ import lombok.Data;
 public class GetBizServiceRequest extends PageRequest {
 
     @ApiModelProperty(value = "业务系统名称",example = "伊甸园")
-    private String serviceName;
+    private String bizServiceName;
 
     @ApiModelProperty(value = "业务系统编码",example = "service-eden")
-    private String serviceCode;
+    private String bizServiceCode;
 }

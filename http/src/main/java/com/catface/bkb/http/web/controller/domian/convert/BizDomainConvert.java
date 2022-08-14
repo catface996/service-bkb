@@ -62,6 +62,8 @@ public class BizDomainConvert {
     public static QueryBizDomainParam convert(GetBizDomainRequest request) {
         QueryBizDomainParam param = new QueryBizDomainParam();
         GET_BIZ_DOMAIN_REQUEST_2_PARAM.copy(request, param, null);
+        param.setSize(request.getSize());
+        param.setCurrent(request.getCurrent());
         return param;
     }
 }

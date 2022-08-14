@@ -1,34 +1,23 @@
-package com.catface.bkb.repository.entity;
+package com.catface.bkb.http.web.controller.authority.response;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-
 import com.catface.bkb.common.enums.AuthorityTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import java.util.Date;
 
 /**
- * <p>
- * 权限点
- * </p>
- *
  * @author catface
- * @since 2022-08-14
+ * @since 2022/8/14
  */
+@ApiModel(description = "权限点模型")
 @Data
-@EqualsAndHashCode(callSuper = false)
-@ApiModel(value="Authority对象", description="权限点")
-public class Authority implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class AuthorityResponse {
 
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     @ApiModelProperty(value = "权限点名称")
@@ -37,14 +26,17 @@ public class Authority implements Serializable {
     @ApiModelProperty(value = "权限点类型： 查询类和操作类;")
     private AuthorityTypeEnum authorityType;
 
-    @ApiModelProperty(value = "所属业务系统ID")
-    private Long bizServiceId;
+    @ApiModelProperty(value = "所属业务系统")
+    private String serviceName;
 
     @ApiModelProperty(value = "权限点URL")
     private String url;
 
     @ApiModelProperty(value = "所属业务域编码")
     private Long bizDomainId;
+
+    @ApiModelProperty(value = "所属业务域名称")
+    private String bizDomainName;
 
     @ApiModelProperty(value = "创建时间")
     private Date created;
@@ -54,6 +46,5 @@ public class Authority implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String remark;
-
 
 }

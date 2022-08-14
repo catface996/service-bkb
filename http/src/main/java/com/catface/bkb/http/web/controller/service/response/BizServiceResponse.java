@@ -18,10 +18,10 @@ public class BizServiceResponse {
     private Long id;
 
     @ApiModelProperty(value = "服务名")
-    private String serviceName;
+    private String bizServiceName;
 
     @ApiModelProperty(value = "服务编码,一般是服务的域名")
-    private String serviceCode;
+    private String bizServiceCode;
 
     @ApiModelProperty(value = "获取权限数据的接入点")
     private String authEndpoint;

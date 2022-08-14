@@ -1,10 +1,16 @@
 package com.catface.bkb.repository.service.impl;
 
-import com.catface.bkb.repository.entity.Authority;
-import com.catface.bkb.repository.mapper.AuthorityMapper;
-import com.catface.bkb.repository.service.AuthorityRpService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.catface.bkb.repository.entity.Authority;
+import com.catface.bkb.repository.entity.exd.AuthorityExd;
+import com.catface.bkb.repository.mapper.AuthorityMapper;
+import com.catface.bkb.repository.param.QueryAuthorityParam;
+import com.catface.bkb.repository.service.AuthorityRpService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,7 +20,20 @@ import org.springframework.stereotype.Service;
  * @author catface
  * @since 2022-08-14
  */
+@Slf4j
 @Service
 public class AuthorityRpServiceImpl extends ServiceImpl<AuthorityMapper, Authority> implements AuthorityRpService {
 
+    /**
+     * 分页查询权限点
+     *
+     * @param param 分页查询请求参数
+     * @return 权限点列表
+     */
+    @Override
+    public Page<AuthorityExd> queryOnePage(QueryAuthorityParam param) {
+        List<AuthorityExd> list = baseMapper.selectOnePage(param);
+        param.setRecords(list);
+        return param;
+    }
 }

@@ -62,6 +62,8 @@ public class BizServiceConvert {
     public static QueryBizServiceParam convert(GetBizServiceRequest request) {
         QueryBizServiceParam param = new QueryBizServiceParam();
         GET_ONE_PAGE_REQUEST_2_PARAM.copy(request, param, null);
+        param.setSize(request.getSize());
+        param.setCurrent(request.getCurrent());
         return param;
     }
 

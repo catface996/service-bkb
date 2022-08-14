@@ -20,11 +20,11 @@ public class SaveServiceRequest {
 
     @ApiModelProperty(value = "服务名",required = true,example = "伊甸园")
     @NotBlank(message = "服务名不能为空")
-    private String serviceName;
+    private String bizServiceName;
 
     @ApiModelProperty(value = "服务编码,一般是服务的域名",required = true,example = "service-eden")
     @NotBlank(message = "服务编码不能为空")
-    private String serviceCode;
+    private String bizServiceCode;
 
     @ApiModelProperty(value = "获取权限数据的接入点")
     private String authEndpoint;
