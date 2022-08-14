@@ -12,6 +12,9 @@ import com.catface.bkb.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.baomidou.mybatisplus.annotation.IdType.ASSIGN_ID;
 import static com.baomidou.mybatisplus.generator.config.rules.DateType.ONLY_DATE;
 
@@ -39,12 +42,28 @@ public class GeneratorServiceEntity extends BaseTest {
 
     @Test
     public void generateAllCode() {
-        generateByTables(serviceNameStartWithI, packageName, "authority");
+        List<String> tablesNames = new ArrayList<>();
+        tablesNames.add("biz_domain");
+        tablesNames.add("authority");
+        tablesNames.add("auth_group");
+        tablesNames.add("role");
+        tablesNames.add("user_to_role");
+        for (String tablesName : tablesNames) {
+            generateByTables(serviceNameStartWithI, packageName, tablesName);
+        }
     }
 
     @Test
     public void generateOnlyEntity() {
-        generateEntity(serviceNameStartWithI, packageName, "authority");
+        List<String> tablesNames = new ArrayList<>();
+        tablesNames.add("biz_domain");
+        tablesNames.add("authority");
+        tablesNames.add("auth_group");
+        tablesNames.add("role");
+        tablesNames.add("user_to_role");
+        for (String tablesName : tablesNames) {
+            generateEntity(serviceNameStartWithI, packageName, tablesName);
+        }
     }
 
     private void generateEntity(boolean serviceNameStartWithI, String packageName,
