@@ -1,7 +1,9 @@
 package com.catface.bkb.repository.service;
 
-import com.catface.bkb.repository.entity.BizDomain;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.catface.bkb.repository.entity.BizDomain;
+import com.catface.bkb.repository.param.QueryBizDomainParam;
 
 /**
  * <p>
@@ -13,4 +15,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface BizDomainRpService extends IService<BizDomain> {
 
+    /**
+     * 分页查询业务域
+     *
+     * @param param 业务域编码,业务域名称
+     * @return 业务域分页列表
+     */
+    Page<BizDomain> queryOnePage(QueryBizDomainParam param);
 }

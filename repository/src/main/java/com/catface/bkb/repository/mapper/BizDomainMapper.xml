@@ -4,7 +4,22 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, biz_domain_name, biz_domain_code, created, updated, remark
+        id
+        , biz_domain_name, biz_domain_code, created, updated, remark
     </sql>
+
+    <!-- 分页查询业务域 -->
+    <select id="selectOnePage" resultType="com.catface.bkb.repository.entity.BizDomain">
+        select
+        <include refid="Base_Column_List"/>
+        from biz_domain
+        where 1=1
+        <if test="param.bizDomainName!=null and param.bizDomainName!=''">
+            and biz_domain_name like concat('%',#{param.bizDomainName},'%')
+        </if>
+        <if test="param.bizDomainCode!=null and param.bizDomainCode!=''">
+            and biz_domain_code like concat('%',#{param.bizDomainCode},'%')
+        </if>
+    </select>
 
 </mapper>
