@@ -31,4 +31,11 @@
         </if>
     </select>
 
+    <!-- 统计客户创建的权限组个数 -->
+    <select id="countByClientId" resultType="java.lang.Integer">
+        select count(id)
+        from auth_group
+        where client_id = #{clientId}
+    </select>
+
 </mapper>

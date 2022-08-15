@@ -1,10 +1,8 @@
 package com.catface.bkb.service.group.param;
 
+import com.catface.bkb.common.enums.VisibilityEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author catface
@@ -19,17 +17,20 @@ public class SaveAuthGroupParam {
     @ApiModelProperty(value = "父级权限组")
     private Long parentId;
 
-    @ApiModelProperty(value = "当前登录的用户所操作的客户ID",required = true,example = "987654321")
-    private Long ctxClientId;
-
-    @ApiModelProperty(value = "当前登录的用户ID",required = true,example = "123456789")
-    private Long ctxUserId;
-
-    @ApiModelProperty(value = "权限组名称",required = true,example = "库区管理")
+    @ApiModelProperty(value = "权限组名称", required = true, example = "库区管理")
     private String groupName;
 
-    @ApiModelProperty(value = "所属业务域ID",required = true,example = "123456789")
+    @ApiModelProperty(value = "所属业务域ID", required = true, example = "123456789")
     private Long bizDomainId;
+
+    @ApiModelProperty(value = "所属客户ID", required = true, example = "987654321")
+    private Long clientId;
+
+    @ApiModelProperty(value = "操作人", required = true, example = "123456789")
+    private Long operator;
+
+    @ApiModelProperty(value = "可见性", example = "PRIVATE")
+    private VisibilityEnum visibility;
 
     @ApiModelProperty(value = "备注")
     private String remark;

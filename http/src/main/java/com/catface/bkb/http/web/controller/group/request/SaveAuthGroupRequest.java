@@ -37,7 +37,7 @@ public class SaveAuthGroupRequest {
     private String groupName;
 
     @ApiModelProperty(value = "所属业务域ID",required = true,example = "123456789")
-    @NotBlank(message = "所属业务域不能为空")
+    @NotNull(message = "所属业务域不能为空")
     private Long bizDomainId;
 
     @ApiModelProperty(value = "备注")

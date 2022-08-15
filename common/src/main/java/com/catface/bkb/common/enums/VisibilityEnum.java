@@ -1,5 +1,6 @@
 package com.catface.bkb.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.catface.common.enums.BaseEnum;
 
 /**
@@ -11,13 +12,13 @@ public enum VisibilityEnum implements BaseEnum {
     /**
      * 可见性枚举值,public:所有客户可见;private:仅客户自己可见;SYSTEM:系统级,仅开发同学可见;
      */
-    PUBLIC("PUBLIC","公开"),
+    PUBLIC("PUBLIC", "公开"),
 
-    PRIVATE("PRIVATE","私有"),
+    PRIVATE("PRIVATE", "私有"),
 
-    SYSTEM("SYSTEM","系统级")
-    ;
+    SYSTEM("SYSTEM", "系统级");
 
+    @EnumValue
     private final String code;
 
     private final String desc;

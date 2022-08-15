@@ -30,4 +30,12 @@ public interface AuthGroupMapper extends BaseMapper<AuthGroup> {
                                    @Param("bizDomainId") Long bizDomainId,
                                    @Param("clientId") Long clientId,
                                    @Param("parentId") Long parentId);
+
+    /**
+     * 统计客户创建的权限组个数
+     *
+     * @param clientId 客户ID
+     * @return 客户创建的权限组的个数
+     */
+    Integer countByClientId(@Param("clientId") Long clientId);
 }
