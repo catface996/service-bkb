@@ -43,7 +43,7 @@ public class GeneratorServiceEntity extends BaseTest {
     @Test
     public void generateAllCode() {
         List<String> tablesNames = new ArrayList<>();
-        tablesNames.add("biz_service");
+        tablesNames.add("role_to_auth_group");
         for (String tablesName : tablesNames) {
             generateByTables(serviceNameStartWithI, packageName, tablesName);
         }
