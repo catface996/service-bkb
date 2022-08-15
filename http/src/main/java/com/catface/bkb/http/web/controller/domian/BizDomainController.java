@@ -2,7 +2,7 @@ package com.catface.bkb.http.web.controller.domian;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.http.config.swagger.SwaggerTagConst;
-import com.catface.bkb.http.web.controller.domian.convert.BizDomainConvert;
+import com.catface.bkb.http.web.controller.domian.convert.BizDomainWebConvert;
 import com.catface.bkb.http.web.controller.domian.request.GetBizDomainRequest;
 import com.catface.bkb.http.web.controller.domian.request.SaveBizDomainRequest;
 import com.catface.bkb.http.web.controller.domian.response.BizDomainResponse;
@@ -39,7 +39,7 @@ public class BizDomainController {
     @ApiOperation(value = "保存业务域")
     @PostMapping(value = "/public/domain/save")
     public JsonResult<Boolean> save(@RequestBody @Valid SaveBizDomainRequest request) {
-        BizDomain entity = BizDomainConvert.convert(request);
+        BizDomain entity = BizDomainWebConvert.convert(request);
         bizDomainRpService.saveOrUpdate(entity);
         return JsonResult.success(true);
     }
@@ -47,9 +47,9 @@ public class BizDomainController {
     @ApiOperation(value = "分页查询业务域")
     @PostMapping(value = "/public/domain/getOnePage")
     public JsonResult<PageVO<BizDomainResponse>> getOnePage(@RequestBody @Valid GetBizDomainRequest request) {
-        QueryBizDomainParam param = BizDomainConvert.convert(request);
+        QueryBizDomainParam param = BizDomainWebConvert.convert(request);
         Page<BizDomain> page = bizDomainRpService.queryOnePage(param);
-        PageVO<BizDomainResponse> pageVO = BizDomainConvert.convert(page);
+        PageVO<BizDomainResponse> pageVO = BizDomainWebConvert.convert(page);
         return JsonResult.success(pageVO);
     }
 

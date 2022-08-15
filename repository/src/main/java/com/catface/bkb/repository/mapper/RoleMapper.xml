@@ -4,7 +4,35 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, biz_domain_id, role_name, visibility, client_id, creator, modifier, created, updated, remark
+        id
+        , biz_domain_id, role_name, visibility, client_id, creator, modifier, created, updated, remark
     </sql>
+
+    <!-- 分页查询角色列表 -->
+    <select id="selectOnePage" resultType="com.catface.bkb.repository.entity.exd.RoleExd">
+        select
+        r.id as id,
+        r.biz_domain_id as bizDomainId,
+        bd.biz_domain_name as bizDomianName,
+        r.role_name as roleName,
+        r.visibility as visibility,
+        r.client_id as clientId,
+        r.creator as creator,
+        r.modifier as modifier,
+        r.created as created,
+        r.updated as updated,
+        r.remark as remark
+        from role r left join biz_domain bd on r.biz_domain_id = bd.id
+        where visibility = #{param.visibility}
+        <if test="param.clientId!=null">
+            and client_id = #{param.clientId}
+        </if>
+        <if test="param.bizDomainId!=null">
+            and biz_domain_id = #{param.bizDomainId}
+        </if>
+        <if test="param.roleName!=null and param.roleName!=''">
+            and role_name like concat('%',#{param.roleName},'%')
+        </if>
+    </select>
 
 </mapper>

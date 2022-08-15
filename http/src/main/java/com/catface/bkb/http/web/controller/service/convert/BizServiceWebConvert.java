@@ -18,7 +18,7 @@ import java.util.List;
  * @author catface
  * @since 2022/8/14
  */
-public class BizServiceConvert {
+public class BizServiceWebConvert {
 
     private final static BeanCopier SAVE_REQUEST_2_ENTITY = BeanCopier.create(SaveServiceRequest.class, BizService.class, false);
 

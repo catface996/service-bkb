@@ -2,7 +2,7 @@ package com.catface.bkb.http.web.controller.authority;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.http.config.swagger.SwaggerTagConst;
-import com.catface.bkb.http.web.controller.authority.convert.AuthorityConvert;
+import com.catface.bkb.http.web.controller.authority.convert.AuthorityWebConvert;
 import com.catface.bkb.http.web.controller.authority.request.GetAuthorityRequest;
 import com.catface.bkb.http.web.controller.authority.request.SaveAuthorityRequest;
 import com.catface.bkb.http.web.controller.authority.response.AuthorityResponse;
@@ -17,15 +17,11 @@ import com.catface.common.model.PageVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author catface
@@ -48,7 +44,7 @@ public class AuthorityController {
     @ApiOperation(value = "保存权限点")
     @PostMapping(value = "/public/authority/save")
     public JsonResult<Boolean> save(@RequestBody @Valid SaveAuthorityRequest request) {
-        Authority entity = AuthorityConvert.convert(request);
+        Authority entity = AuthorityWebConvert.convert(request);
         authorityService.save(entity);
         return JsonResult.success(true);
     }
@@ -56,9 +52,9 @@ public class AuthorityController {
     @ApiOperation(value = "分页查询权限点")
     @PostMapping(value = "/public/authority/getOnePage")
     public JsonResult<PageVO<AuthorityResponse>> getOnePage(@RequestBody @Valid GetAuthorityRequest request) {
-        QueryAuthorityParam param = AuthorityConvert.convert(request);
+        QueryAuthorityParam param = AuthorityWebConvert.convert(request);
         Page<AuthorityExd> page = authorityRpService.queryOnePage(param);
-        PageVO<AuthorityResponse> pageVO = AuthorityConvert.convert(page);
+        PageVO<AuthorityResponse> pageVO = AuthorityWebConvert.convert(page);
         return JsonResult.success(pageVO);
     }
 

@@ -19,7 +19,7 @@ import java.util.List;
  * @author catface
  * @since 2022/8/14
  */
-public class AuthorityConvert {
+public class AuthorityWebConvert {
 
     private static final BeanCopier SAVE_AUTHORITY_REQUEST_2_ENTITY = BeanCopier.create(SaveAuthorityRequest.class, Authority.class, false);
 

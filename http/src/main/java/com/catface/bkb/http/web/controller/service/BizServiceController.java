@@ -2,7 +2,7 @@ package com.catface.bkb.http.web.controller.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.http.config.swagger.SwaggerTagConst;
-import com.catface.bkb.http.web.controller.service.convert.BizServiceConvert;
+import com.catface.bkb.http.web.controller.service.convert.BizServiceWebConvert;
 import com.catface.bkb.http.web.controller.service.request.GetBizServiceRequest;
 import com.catface.bkb.http.web.controller.service.request.SaveServiceRequest;
 import com.catface.bkb.http.web.controller.service.response.BizServiceResponse;
@@ -39,7 +39,7 @@ public class BizServiceController {
     @ApiOperation(value = "保存业务系统")
     @PostMapping(value = "/public/service/save")
     public JsonResult<Boolean> save(@RequestBody @Valid SaveServiceRequest request) {
-        BizService entity = BizServiceConvert.convert(request);
+        BizService entity = BizServiceWebConvert.convert(request);
         bizServiceRpService.saveOrUpdate(entity);
         return JsonResult.success(true);
     }
@@ -47,9 +47,9 @@ public class BizServiceController {
     @ApiOperation(value = "分页查询业务系统")
     @PostMapping(value = "/public/service/getOnePage")
     public JsonResult<PageVO<BizServiceResponse>> getOnePage(@RequestBody @Valid GetBizServiceRequest request) {
-        QueryBizServiceParam param = BizServiceConvert.convert(request);
+        QueryBizServiceParam param = BizServiceWebConvert.convert(request);
         Page<BizService> page = bizServiceRpService.queryOnePage(param);
-        PageVO<BizServiceResponse> pageVO = BizServiceConvert.convert(page);
+        PageVO<BizServiceResponse> pageVO = BizServiceWebConvert.convert(page);
         return JsonResult.success(pageVO);
     }
 
