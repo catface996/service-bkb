@@ -4,11 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.common.enums.VisibilityEnum;
 import com.catface.bkb.http.config.swagger.SwaggerTagConst;
 import com.catface.bkb.http.web.controller.role.convert.RoleWebConvert;
-import com.catface.bkb.http.web.controller.role.request.DeleteRoleRequest;
-import com.catface.bkb.http.web.controller.role.request.GetPrivateRoleRequest;
-import com.catface.bkb.http.web.controller.role.request.GetPublicRoleRequest;
-import com.catface.bkb.http.web.controller.role.request.SaveRoleRequest;
+import com.catface.bkb.http.web.controller.role.request.*;
 import com.catface.bkb.http.web.controller.role.response.RoleResponse;
+import com.catface.bkb.http.web.controller.role.response.RoleToAuthResponse;
 import com.catface.bkb.repository.entity.Role;
 import com.catface.bkb.repository.entity.exd.RoleExd;
 import com.catface.bkb.repository.param.QueryRoleParam;
@@ -70,8 +68,30 @@ public class RoleController {
     @ApiOperation(value = "删除私有角色")
     @PostMapping(value = "/public/role/deletePrivate")
     public JsonResult<Boolean> deletePrivate(@RequestBody @Valid DeleteRoleRequest request) {
-        roleService.deletePrivate(request.getRoleId(),request.getCtxClientId());
+        roleService.deletePrivate(request.getRoleId(), request.getCtxClientId());
         return JsonResult.success();
     }
+
+    @ApiOperation(value = "绑定权限组到角色")
+    @PostMapping(value = "/public/role/bindAuthGroup")
+    public JsonResult<Boolean> bindAuthGroup(@RequestBody @Valid BindGroupToRoleRequest request) {
+        roleService.bindAuthGroup(request.getRoleId(), request.getAuthGroupId(), request.getCtxClientId(),
+                request.getCtxUserId());
+        return JsonResult.success();
+    }
+
+    @ApiOperation(value = "获取角色绑定的权限组")
+    @PostMapping(value = "/public/role/getAuthGroup")
+    public JsonResult<PageVO<RoleToAuthResponse>> getAuthGroup(@RequestBody @Valid GetAuthGroupToRoleRequest request) {
+        return JsonResult.success();
+    }
+
+
+    @ApiOperation(value = "删除角色关联的权限组")
+    @PostMapping(value = "/public/role/removeAuthGroup")
+    public JsonResult<Boolean> removeAuthGroup(@RequestBody @Valid RemoveAuthGroupFromRoleRequest request) {
+        return JsonResult.success();
+    }
+
 
 }

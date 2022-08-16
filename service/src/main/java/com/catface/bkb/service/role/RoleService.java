@@ -33,4 +33,14 @@ public interface RoleService {
      * @param clientId 角色所属客户ID
      */
     void deletePrivate(Long id, Long clientId);
+
+    /**
+     * 绑定权限组到角色上
+     *
+     * @param roleId      角色ID
+     * @param authGroupId 权限组ID
+     * @param clientId    客户ID
+     * @param operator    操作人
+     */
+    void bindAuthGroup(Long roleId, Long authGroupId, Long clientId,Long operator);
 }

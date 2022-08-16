@@ -4,7 +4,19 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, role_id, auth_group_id, creator, created, remark
+        id
+        , role_id, auth_group_id, creator, created, remark
     </sql>
+
+    <!-- 分页查询角色关联的权限组 -->
+    <select id="selectOnePage" resultType="com.catface.bkb.repository.entity.exd.RoleToAuthGroupExd">
+        select
+        id, role_id, auth_group_id, creator, created, remark
+        from role_to_auth_group rg join auth_group ag on rg.auth_group_id = ag.id
+        where rg.role_id = #{param.roleId}
+        <if test="param.authGroupName!=null and param.authGroupName!=''">
+            and ag.auth_group_name like concat('%',#{param.authGroupName},'%')
+        </if>
+    </select>
 
 </mapper>

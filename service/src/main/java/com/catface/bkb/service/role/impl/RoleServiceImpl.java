@@ -2,12 +2,16 @@ package com.catface.bkb.service.role.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.common.enums.VisibilityEnum;
+import com.catface.bkb.repository.entity.AuthGroup;
 import com.catface.bkb.repository.entity.BizDomain;
 import com.catface.bkb.repository.entity.Role;
+import com.catface.bkb.repository.entity.RoleToAuthGroup;
 import com.catface.bkb.repository.entity.exd.RoleExd;
 import com.catface.bkb.repository.param.QueryRoleParam;
+import com.catface.bkb.repository.service.AuthGroupRpService;
 import com.catface.bkb.repository.service.BizDomainRpService;
 import com.catface.bkb.repository.service.RoleRpService;
+import com.catface.bkb.repository.service.RoleToAuthGroupRpService;
 import com.catface.bkb.service.role.RoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,9 +29,16 @@ public class RoleServiceImpl implements RoleService {
 
     private final BizDomainRpService bizDomainRpService;
 
-    public RoleServiceImpl(RoleRpService roleRpService, BizDomainRpService bizDomainRpService) {
+    private final AuthGroupRpService authGroupRpService;
+
+    private final RoleToAuthGroupRpService roleToAuthGroupRpService;
+
+    public RoleServiceImpl(RoleRpService roleRpService, BizDomainRpService bizDomainRpService,
+                           AuthGroupRpService authGroupRpService, RoleToAuthGroupRpService roleToAuthGroupRpService) {
         this.roleRpService = roleRpService;
         this.bizDomainRpService = bizDomainRpService;
+        this.authGroupRpService = authGroupRpService;
+        this.roleToAuthGroupRpService = roleToAuthGroupRpService;
     }
 
     /**
@@ -90,6 +101,52 @@ public class RoleServiceImpl implements RoleService {
 
         roleRpService.removeById(id);
 
+    }
+
+    /**
+     * 绑定权限组到角色上
+     *
+     * @param roleId      角色ID
+     * @param authGroupId 权限组ID
+     * @param clientId    客户ID
+     * @param operator    操作人
+     */
+    @Override
+    public void bindAuthGroup(Long roleId, Long authGroupId, Long clientId, Long operator) {
+
+        // 检查角色和权限是否存,并检查是否是私有自建
+        Role role = roleRpService.getById(roleId);
+        Assert.notNull(role, "待绑定权限组的角色不存在");
+        Assert.state(role.getVisibility() == VisibilityEnum.PRIVATE, "仅支持对私有角色做权限组绑定");
+        Assert.state(role.getClientId().equals(clientId), "仅支持对自有角色做权限组绑定");
+
+        // 此处注意,允许将公共权限组绑定到自建的私有角色上
+        // 如果是私有的权限组,需要检查权限组所属客户是否与当前指定的客户一致
+        AuthGroup authGroup = authGroupRpService.getById(authGroupId);
+        Assert.notNull(authGroup, "待绑定到角色的权限组不存在");
+
+        if (authGroup.getVisibility().equals(VisibilityEnum.PRIVATE)) {
+            Assert.state(authGroup.getClientId().equals(clientId), "不支持绑定非自建的私有权限组");
+        }
+
+        // 构建并保存角色和权限组的关联关系
+        buildAndSaveRoleToAuthGroup(roleId, authGroupId, operator);
+
+    }
+
+    /**
+     * 构建并保存角色和权限组的绑定关系
+     *
+     * @param roleId      角色ID
+     * @param authGroupId 权限组ID
+     * @param operator    操作人
+     */
+    private void buildAndSaveRoleToAuthGroup(Long roleId, Long authGroupId, Long operator) {
+        RoleToAuthGroup entity = new RoleToAuthGroup();
+        entity.setRoleId(roleId);
+        entity.setAuthGroupId(authGroupId);
+        entity.setCreator(operator);
+        roleToAuthGroupRpService.save(entity);
     }
 
 
