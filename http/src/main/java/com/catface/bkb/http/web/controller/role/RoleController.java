@@ -95,6 +95,7 @@ public class RoleController {
     @ApiOperation(value = "删除角色关联的权限组")
     @PostMapping(value = "/public/role/removeAuthGroup")
     public JsonResult<Boolean> removeAuthGroup(@RequestBody @Valid RemoveAuthGroupFromRoleRequest request) {
+        roleService.removeAuthGroupFromRole(request.getRoleToAuthGroupId(),request.getCtxClientId());
         return JsonResult.success();
     }
 

@@ -54,4 +54,12 @@ public interface RoleService {
      * @return 角色绑定的权限组
      */
     Page<RoleToAuthGroupExd> queryAuthGroup(QueryRoleToAuthGroupParam param, Long clientId);
+
+    /**
+     * 删除角色绑定的权限组
+     *
+     * @param roleToAuthGroupId 角色关联权限组的ID
+     * @param clientId          客户ID
+     */
+    void removeAuthGroupFromRole(Long roleToAuthGroupId, Long clientId);
 }

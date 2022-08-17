@@ -150,10 +150,37 @@ public class RoleServiceImpl implements RoleService {
         Role role = roleRpService.getById(param.getRoleId());
         Assert.notNull(role, "角色不能为空");
         if (role.getVisibility() == VisibilityEnum.PRIVATE) {
-            Assert.state(role.getClientId().equals(clientId),"非自建私有角色");
+            Assert.state(role.getClientId().equals(clientId), "非自建私有角色");
         }
         // 查询分页结果,并返回
         return roleToAuthGroupRpService.queryOnePage(param);
+    }
+
+    /**
+     * 删除角色绑定的权限组
+     *
+     * @param roleToAuthGroupId 角色关联权限组的ID
+     * @param clientId          客户ID
+     */
+    @Override
+    public void removeAuthGroupFromRole(Long roleToAuthGroupId, Long clientId) {
+
+        // 检查绑定关系是否存在,不存在直接返回
+        RoleToAuthGroup roleToAuthGroup = roleToAuthGroupRpService.getById(roleToAuthGroupId);
+        if (roleToAuthGroup == null) {
+            log.warn("待解除的角色和权限组的关联关系不存在,关联关系ID:{}", roleToAuthGroupId);
+            return;
+        }
+        Role role = roleRpService.getById(roleToAuthGroup.getRoleId());
+        if (role != null) {
+            // 检查是否是公共角色的绑定关系,如果是,禁止删除
+            Assert.state(role.getVisibility() == VisibilityEnum.PRIVATE, "不支持对非私有角色的权限组解除");
+            // 检查待解除绑定关系的角色是否是私有自建,如果不是,禁止删除
+            Assert.state(role.getClientId().equals(clientId),"不支持对非自建角色的权限组解除");
+        }
+
+        // 执行删除关联关系动作
+        roleToAuthGroupRpService.removeById(roleToAuthGroupId);
     }
 
     /**
