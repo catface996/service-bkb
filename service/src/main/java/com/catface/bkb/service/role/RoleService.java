@@ -3,7 +3,9 @@ package com.catface.bkb.service.role;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.repository.entity.Role;
 import com.catface.bkb.repository.entity.exd.RoleExd;
+import com.catface.bkb.repository.entity.exd.RoleToAuthGroupExd;
 import com.catface.bkb.repository.param.QueryRoleParam;
+import com.catface.bkb.repository.param.QueryRoleToAuthGroupParam;
 
 /**
  * @author catface
@@ -42,5 +44,14 @@ public interface RoleService {
      * @param clientId    客户ID
      * @param operator    操作人
      */
-    void bindAuthGroup(Long roleId, Long authGroupId, Long clientId,Long operator);
+    void bindAuthGroup(Long roleId, Long authGroupId, Long clientId, Long operator);
+
+    /**
+     * 查询角色关联的权限组
+     *
+     * @param param    分页参数,包括角色ID和角色名称
+     * @param clientId 客户ID
+     * @return 角色绑定的权限组
+     */
+    Page<RoleToAuthGroupExd> queryAuthGroup(QueryRoleToAuthGroupParam param, Long clientId);
 }

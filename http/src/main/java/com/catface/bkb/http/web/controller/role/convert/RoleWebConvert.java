@@ -3,11 +3,15 @@ package com.catface.bkb.http.web.controller.role.convert;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.http.web.controller.role.request.GetPrivateRoleRequest;
 import com.catface.bkb.http.web.controller.role.request.GetPublicRoleRequest;
+import com.catface.bkb.http.web.controller.role.request.GetRoleToAuthGroupRequest;
 import com.catface.bkb.http.web.controller.role.request.SaveRoleRequest;
 import com.catface.bkb.http.web.controller.role.response.RoleResponse;
+import com.catface.bkb.http.web.controller.role.response.RoleToAuthResponse;
 import com.catface.bkb.repository.entity.Role;
 import com.catface.bkb.repository.entity.exd.RoleExd;
+import com.catface.bkb.repository.entity.exd.RoleToAuthGroupExd;
 import com.catface.bkb.repository.param.QueryRoleParam;
+import com.catface.bkb.repository.param.QueryRoleToAuthGroupParam;
 import com.catface.common.model.PageVO;
 import org.joda.time.DateTime;
 import org.springframework.cglib.beans.BeanCopier;
@@ -26,6 +30,9 @@ public class RoleWebConvert {
     private static final BeanCopier SAVE_REQUEST_2_ENTITY = BeanCopier.create(SaveRoleRequest.class, Role.class, false);
 
     private static final BeanCopier ENTITY_2_RESPONSE = BeanCopier.create(RoleExd.class, RoleResponse.class, false);
+
+    private static final BeanCopier ROLE_TO_AUTH_GROUP_EXD_2_RESPONSE = BeanCopier.create(RoleToAuthGroupExd.class,
+            RoleToAuthResponse.class, false);
 
     public static Role convert(SaveRoleRequest request) {
         Role entity = new Role();
@@ -83,4 +90,36 @@ public class RoleWebConvert {
         pageVO.setRecords(list);
         return pageVO;
     }
+
+    public static QueryRoleToAuthGroupParam convert(GetRoleToAuthGroupRequest request) {
+        QueryRoleToAuthGroupParam param = new QueryRoleToAuthGroupParam();
+        param.setRoleId(request.getRoleId());
+        param.setAuthGroupName(request.getAuthGroupNae());
+        param.setCurrent(request.getCurrent());
+        param.setSize(request.getSize());
+        return param;
+    }
+
+    public static RoleToAuthResponse convertRoleToAuthGroup(RoleToAuthGroupExd entity) {
+        RoleToAuthResponse response = new RoleToAuthResponse();
+        ROLE_TO_AUTH_GROUP_EXD_2_RESPONSE.copy(entity, response, null);
+        return response;
+    }
+
+    public static List<RoleToAuthResponse> convertRoleToAuthGroup(List<RoleToAuthGroupExd> entities) {
+        List<RoleToAuthResponse> responses = new ArrayList<>();
+        for (RoleToAuthGroupExd entity : entities) {
+            responses.add(convertRoleToAuthGroup(entity));
+        }
+        return responses;
+    }
+
+    public static PageVO<RoleToAuthResponse> convertRoleToAuthGroup(Page<RoleToAuthGroupExd> page) {
+        PageVO<RoleToAuthResponse> pageVO = new PageVO<>(page.getCurrent(), page.getSize(), page.getPages(), page.getTotal());
+        List<RoleToAuthResponse> list = convertRoleToAuthGroup(page.getRecords());
+        pageVO.setRecords(list);
+        return pageVO;
+    }
+
+
 }

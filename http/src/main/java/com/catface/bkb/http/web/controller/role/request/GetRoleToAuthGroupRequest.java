@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @ApiModel(description = "获取角色绑定的权限组请求")
-public class GetAuthGroupToRoleRequest extends PageRequest {
+public class GetRoleToAuthGroupRequest extends PageRequest {
 
     @ApiModelProperty(value = "会话中的客户ID",required = true,example = "1234567890")
     @NotNull(message = "客户ID不能为空")

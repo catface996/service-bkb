@@ -9,7 +9,9 @@ import com.catface.bkb.http.web.controller.role.response.RoleResponse;
 import com.catface.bkb.http.web.controller.role.response.RoleToAuthResponse;
 import com.catface.bkb.repository.entity.Role;
 import com.catface.bkb.repository.entity.exd.RoleExd;
+import com.catface.bkb.repository.entity.exd.RoleToAuthGroupExd;
 import com.catface.bkb.repository.param.QueryRoleParam;
+import com.catface.bkb.repository.param.QueryRoleToAuthGroupParam;
 import com.catface.bkb.service.role.RoleService;
 import com.catface.common.model.JsonResult;
 import com.catface.common.model.PageVO;
@@ -82,8 +84,11 @@ public class RoleController {
 
     @ApiOperation(value = "获取角色绑定的权限组")
     @PostMapping(value = "/public/role/getAuthGroup")
-    public JsonResult<PageVO<RoleToAuthResponse>> getAuthGroup(@RequestBody @Valid GetAuthGroupToRoleRequest request) {
-        return JsonResult.success();
+    public JsonResult<PageVO<RoleToAuthResponse>> getAuthGroup(@RequestBody @Valid GetRoleToAuthGroupRequest request) {
+        QueryRoleToAuthGroupParam param = RoleWebConvert.convert(request);
+        Page<RoleToAuthGroupExd> page = roleService.queryAuthGroup(param, request.getCtxClientId());
+        PageVO<RoleToAuthResponse> pageVO = RoleWebConvert.convertRoleToAuthGroup(page);
+        return JsonResult.success(pageVO);
     }
 
 

@@ -7,7 +7,9 @@ import com.catface.bkb.repository.entity.BizDomain;
 import com.catface.bkb.repository.entity.Role;
 import com.catface.bkb.repository.entity.RoleToAuthGroup;
 import com.catface.bkb.repository.entity.exd.RoleExd;
+import com.catface.bkb.repository.entity.exd.RoleToAuthGroupExd;
 import com.catface.bkb.repository.param.QueryRoleParam;
+import com.catface.bkb.repository.param.QueryRoleToAuthGroupParam;
 import com.catface.bkb.repository.service.AuthGroupRpService;
 import com.catface.bkb.repository.service.BizDomainRpService;
 import com.catface.bkb.repository.service.RoleRpService;
@@ -132,6 +134,26 @@ public class RoleServiceImpl implements RoleService {
         // 构建并保存角色和权限组的关联关系
         buildAndSaveRoleToAuthGroup(roleId, authGroupId, operator);
 
+    }
+
+    /**
+     * 查询角色关联的权限组
+     *
+     * @param param    分页参数,包括角色ID和角色名称
+     * @param clientId 客户ID
+     * @return 角色绑定的权限组
+     */
+    @Override
+    public Page<RoleToAuthGroupExd> queryAuthGroup(QueryRoleToAuthGroupParam param, Long clientId) {
+
+        // 检查角色是否是私有自建角色
+        Role role = roleRpService.getById(param.getRoleId());
+        Assert.notNull(role, "角色不能为空");
+        if (role.getVisibility() == VisibilityEnum.PRIVATE) {
+            Assert.state(role.getClientId().equals(clientId),"非自建私有角色");
+        }
+        // 查询分页结果,并返回
+        return roleToAuthGroupRpService.queryOnePage(param);
     }
 
     /**

@@ -11,11 +11,17 @@
     <!-- 分页查询角色关联的权限组 -->
     <select id="selectOnePage" resultType="com.catface.bkb.repository.entity.exd.RoleToAuthGroupExd">
         select
-        id, role_id, auth_group_id, creator, created, remark
+        rg.id as id,
+        rg.role_id as roleId,
+        rg.auth_group_id as authGroupId,
+        ag.group_name as authGroupName,
+        rg.creator as creator,
+        rg.created as created,
+        rg.remark as remark
         from role_to_auth_group rg join auth_group ag on rg.auth_group_id = ag.id
         where rg.role_id = #{param.roleId}
         <if test="param.authGroupName!=null and param.authGroupName!=''">
-            and ag.auth_group_name like concat('%',#{param.authGroupName},'%')
+            and ag.group_name like concat('%',#{param.authGroupName},'%')
         </if>
     </select>
 

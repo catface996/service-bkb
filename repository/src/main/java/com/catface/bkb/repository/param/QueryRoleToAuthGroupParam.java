@@ -2,6 +2,7 @@ package com.catface.bkb.repository.param;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.repository.entity.RoleToAuthGroup;
+import com.catface.bkb.repository.entity.exd.RoleToAuthGroupExd;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -12,7 +13,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(description = "查询角色关联的权限组参数")
-public class QueryRoleToAuthGroupParam extends Page<RoleToAuthGroup> {
+public class QueryRoleToAuthGroupParam extends Page<RoleToAuthGroupExd> {
 
     @ApiModelProperty(value = "角色ID")
     private Long roleId;
