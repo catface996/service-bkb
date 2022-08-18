@@ -7,6 +7,7 @@ import com.catface.bkb.repository.param.QueryRoleParam;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -25,4 +26,5 @@ public interface RoleMapper extends BaseMapper<Role> {
      * @return 角色分页列表
      */
     List<RoleExd> selectOnePage(@Param("param") QueryRoleParam param);
+
 }

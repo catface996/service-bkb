@@ -35,4 +35,15 @@ public class BizDomainRpServiceImpl extends ServiceImpl<BizDomainMapper, BizDoma
         param.setRecords(list);
         return param;
     }
+
+    /**
+     * 根据业务域编码查询业务域
+     *
+     * @param bizDomainCode 业务域编码
+     * @return 业务域
+     */
+    @Override
+    public BizDomain queryByCode(String bizDomainCode) {
+        return baseMapper.selectByBizDomainCode(bizDomainCode);
+    }
 }

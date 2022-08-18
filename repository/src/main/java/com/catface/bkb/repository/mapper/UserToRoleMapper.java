@@ -25,4 +25,12 @@ public interface UserToRoleMapper extends BaseMapper<UserToRole> {
      * @return 用户和角色的关联
      */
     List<UserToRoleExd> selectOnePage(@Param("param") QueryUserToRoleParam param);
+
+    /**
+     * 查询用户在指定客户下绑定的角色列表
+     * @param clientId 客户ID
+     * @param userId 用户ID
+     * @return 绑定的角色
+     */
+    List<UserToRole> selectByClientUser(@Param("clientId") Long clientId, @Param("userId") Long userId);
 }

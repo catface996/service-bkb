@@ -24,4 +24,11 @@ public interface BizDomainMapper extends BaseMapper<BizDomain> {
      * @return 分页列表
      */
     List<BizDomain> selectOnePage(@Param("param") QueryBizDomainParam param);
+
+    /**
+     * 根据业务域编码查询业务域
+     * @param bizDomainCode 业务域编码
+     * @return 业务域
+     */
+    BizDomain selectByBizDomainCode(@Param("bizDomainCode") String bizDomainCode);
 }

@@ -1,7 +1,5 @@
 package com.catface.bkb.http.web.controller.authority.response;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.catface.bkb.common.enums.AuthorityTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -37,6 +35,12 @@ public class AuthorityResponse {
 
     @ApiModelProperty(value = "所属业务域名称")
     private String bizDomainName;
+
+    @ApiModelProperty(value = "权限组ID")
+    private Long authGroupId;
+
+    @ApiModelProperty(value = "权限组名称")
+    private String authGroupName;
 
     @ApiModelProperty(value = "创建时间")
     private Date created;

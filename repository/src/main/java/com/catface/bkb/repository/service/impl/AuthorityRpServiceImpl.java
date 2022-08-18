@@ -36,4 +36,16 @@ public class AuthorityRpServiceImpl extends ServiceImpl<AuthorityMapper, Authori
         param.setRecords(list);
         return param;
     }
+
+    /**
+     * 根据业务域和url查询权限点
+     *
+     * @param bizDomainId 业务域ID
+     * @param url         url
+     * @return 权限点
+     */
+    @Override
+    public Authority queryByBizDomainUrl(Long bizDomainId, String url) {
+        return baseMapper.selectByBizDomainUrl(bizDomainId, url);
+    }
 }

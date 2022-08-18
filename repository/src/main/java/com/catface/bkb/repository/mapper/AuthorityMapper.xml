@@ -5,7 +5,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id
-        , authority_name, authority_type, biz_service_id, url, biz_domain_id, visibility, created, updated, remark
+        , authority_name, authority_type, biz_service_id, url, biz_domain_id, auth_group_id, created, updated, remark
     </sql>
 
     <!-- 分页查询权限点 -->
@@ -18,13 +18,16 @@
         bs.biz_service_name as bizServiceName,
         a.biz_domain_id as bizDomainId,
         bd.biz_domain_name as bizDomainName,
+        a.auth_group_id as authGroupId,
+        ag.group_name as authGroupName,
         a.url as url,
         a.created as created,
         a.updated as updated,
         a.remark as remark
         from authority a
-            left join biz_service bs on a.biz_service_id = bs.id
-            left join biz_domain bd on a.biz_domain_id = bd.id
+        left join biz_service bs on a.biz_service_id = bs.id
+        left join biz_domain bd on a.biz_domain_id = bd.id
+        left join auth_group ag on a.auth_group_id = ag.id
         where 1=1
         <if test="param.bizDomainId!=null">
             and biz_domain_id = #{param.bizDomainId}
@@ -45,6 +48,13 @@
             and url like concat('%',#{param.url},'%')
         </if>
         and visibility = #{param.visibility}
+    </select>
+
+    <!-- 根据业务和url查询权限点 -->
+    <select id="selectByBizDomainUrl" resultType="com.catface.bkb.repository.entity.Authority">
+        select
+        <include refid="Base_Column_List"/>
+        from authority where biz_domain_id = #{bizDomainId} and url = #{url}
     </select>
 
 </mapper>

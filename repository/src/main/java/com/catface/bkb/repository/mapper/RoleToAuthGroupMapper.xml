@@ -25,4 +25,14 @@
         </if>
     </select>
 
+    <!-- 判断角色中是否包含指定的权限点 -->
+    <select id="selectByRoleIdsGroupId" resultType="com.catface.bkb.repository.entity.RoleToAuthGroup">
+        select 1 from role_to_auth_group
+        where auth_group_id =#{groupId}
+        and role_id in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
 </mapper>

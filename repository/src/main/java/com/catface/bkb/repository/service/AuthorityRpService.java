@@ -1,8 +1,8 @@
 package com.catface.bkb.repository.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.catface.bkb.repository.entity.Authority;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.catface.bkb.repository.entity.Authority;
 import com.catface.bkb.repository.entity.exd.AuthorityExd;
 import com.catface.bkb.repository.param.QueryAuthorityParam;
 
@@ -19,8 +19,18 @@ public interface AuthorityRpService extends IService<Authority> {
 
     /**
      * 分页查询权限点
+     *
      * @param param 分页查询请求参数
      * @return 权限点列表
      */
     Page<AuthorityExd> queryOnePage(QueryAuthorityParam param);
+
+    /**
+     * 根据业务域和url查询权限点
+     *
+     * @param bizDomainId 业务域ID
+     * @param url         url
+     * @return 权限点
+     */
+    Authority queryByBizDomainUrl(Long bizDomainId, String url);
 }

@@ -16,4 +16,7 @@ public class AuthorityExd extends Authority {
 
     @ApiModelProperty(value = "业务系统名称")
     private String bizServiceName;
+
+    @ApiModelProperty(value = "所属权限组")
+    private String authGroupName;
 }

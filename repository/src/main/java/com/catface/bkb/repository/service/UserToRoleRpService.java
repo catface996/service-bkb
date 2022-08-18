@@ -6,6 +6,8 @@ import com.catface.bkb.repository.entity.UserToRole;
 import com.catface.bkb.repository.entity.exd.UserToRoleExd;
 import com.catface.bkb.repository.param.QueryUserToRoleParam;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户关联角色 服务类
@@ -23,4 +25,13 @@ public interface UserToRoleRpService extends IService<UserToRole> {
      * @return 用户关联的客户
      */
     Page<UserToRoleExd> queryOnePage(QueryUserToRoleParam param);
+
+    /**
+     * 查询用户在指定客户下,是否有绑定的橘色
+     *
+     * @param clientId 客户ID
+     * @param userId   用户ID
+     * @return 用户在客户下绑定的角色列表
+     */
+    List<UserToRole> queryByClientUser(Long clientId, Long userId);
 }

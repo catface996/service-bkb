@@ -36,4 +36,16 @@ public class UserToRoleRpServiceImpl extends ServiceImpl<UserToRoleMapper, UserT
         param.setRecords(list);
         return param;
     }
+
+    /**
+     * 查询用户在指定客户下,是否有绑定的橘色
+     *
+     * @param clientId 客户ID
+     * @param userId   用户ID
+     * @return 用户在客户下绑定的角色列表
+     */
+    @Override
+    public List<UserToRole> queryByClientUser(Long clientId, Long userId) {
+        return baseMapper.selectByClientUser(clientId, userId);
+    }
 }

@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -35,5 +36,17 @@ public class RoleRpServiceImpl extends ServiceImpl<RoleMapper, Role> implements 
         List<RoleExd> list = baseMapper.selectOnePage(param);
         param.setRecords(list);
         return param;
+    }
+
+    /**
+     * 判断角色列表中是否包含权限点
+     *
+     * @param roleIds     角色ID列表
+     * @param authorityId 权限点ID
+     * @return true:包含;false:不包含;
+     */
+    @Override
+    public boolean hasAuthority(Set<Long> roleIds, Long authorityId) {
+        return false;
     }
 }

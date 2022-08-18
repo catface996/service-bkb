@@ -19,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.util.Set;
+
 /**
  * @author catface
  * @since 2022/8/15
@@ -182,6 +184,7 @@ public class RoleServiceImpl implements RoleService {
         // 执行删除关联关系动作
         roleToAuthGroupRpService.removeById(roleToAuthGroupId);
     }
+
 
     /**
      * 构建并保存角色和权限组的绑定关系

@@ -22,4 +22,12 @@ public interface BizDomainRpService extends IService<BizDomain> {
      * @return 业务域分页列表
      */
     Page<BizDomain> queryOnePage(QueryBizDomainParam param);
+
+    /**
+     * 根据业务域编码查询业务域
+     *
+     * @param bizDomainCode 业务域编码
+     * @return 业务域
+     */
+    BizDomain queryByCode(String bizDomainCode);
 }

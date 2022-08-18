@@ -22,4 +22,11 @@
         </if>
     </select>
 
+    <!-- 根据业务域编码查询业务域 -->
+    <select id="selectByBizDomainCode" resultType="com.catface.bkb.repository.entity.BizDomain">
+        select
+        <include refid="Base_Column_List"/>
+        from biz_domain where biz_domain_code = #{bizDomainCode}
+    </select>
+
 </mapper>

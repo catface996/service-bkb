@@ -23,8 +23,8 @@
         utr.updated as updated,
         utr.remark as remark
         from user_to_role utr
-            join role r on utr.role_id = r.id
-            join biz_domain bd on utr.biz_domain_id = bd.id
+        join role r on utr.role_id = r.id
+        join biz_domain bd on utr.biz_domain_id = bd.id
         where utr.client_id = #{param.clientId}
         <if test="param.userId!=null">
             and utr.user_id = #{param.userId}
@@ -35,6 +35,13 @@
         <if test="param.bizDomainId!=null">
             and utr.biz_domain_id = #{param.bizDomainId}
         </if>
+    </select>
+
+    <!-- 查询用户在指定客户下绑定的角色列表 -->
+    <select id="selectByClientUser" resultType="com.catface.bkb.repository.entity.UserToRole">
+        select
+        <include refid="Base_Column_List"/>
+        from user_to_role where user_id = #{userId} and client_id = #{clientId}
     </select>
 
 </mapper>

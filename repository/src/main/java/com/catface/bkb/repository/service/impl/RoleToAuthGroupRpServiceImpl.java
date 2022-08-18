@@ -9,8 +9,10 @@ import com.catface.bkb.repository.param.QueryRoleToAuthGroupParam;
 import com.catface.bkb.repository.service.RoleToAuthGroupRpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -23,7 +25,7 @@ import java.util.List;
 @Slf4j
 @Service
 public class RoleToAuthGroupRpServiceImpl extends ServiceImpl<RoleToAuthGroupMapper, RoleToAuthGroup> implements RoleToAuthGroupRpService {
-    
+
 
     /**
      * 分页查询角色关联的权限组
@@ -36,5 +38,18 @@ public class RoleToAuthGroupRpServiceImpl extends ServiceImpl<RoleToAuthGroupMap
         List<RoleToAuthGroupExd> list = baseMapper.selectOnePage(param);
         param.setRecords(list);
         return param;
+    }
+
+    /**
+     * 检查角色中是否包含指定的权限点
+     *
+     * @param roleIds     角色ID列表
+     * @param authGroupId 权限组ID
+     * @return true:包含;false:不包含;
+     */
+    @Override
+    public boolean hasAuthGroup(Set<Long> roleIds, Long authGroupId) {
+        List<RoleToAuthGroup> list = baseMapper.selectByRoleIdsGroupId(roleIds, authGroupId);
+        return !CollectionUtils.isEmpty(list);
     }
 }

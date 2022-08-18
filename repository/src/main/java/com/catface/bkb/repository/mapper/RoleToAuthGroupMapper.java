@@ -7,6 +7,7 @@ import com.catface.bkb.repository.param.QueryRoleToAuthGroupParam;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -25,4 +26,12 @@ public interface RoleToAuthGroupMapper extends BaseMapper<RoleToAuthGroup> {
      * @return 角色关联的权限组
      */
     List<RoleToAuthGroupExd> selectOnePage(@Param("param") QueryRoleToAuthGroupParam param);
+
+    /**
+     * 判断角色中是否包含指定的权限点
+     * @param roleIds 角色ID列表
+     * @param groupId 权限组ID
+     * @return 1:包含;null:不包含
+     */
+    List<RoleToAuthGroup> selectByRoleIdsGroupId(@Param("roleIds") Set<Long> roleIds, @Param("groupId") Long groupId);
 }

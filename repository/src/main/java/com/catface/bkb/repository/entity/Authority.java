@@ -47,8 +47,8 @@ public class Authority implements Serializable {
     @ApiModelProperty(value = "所属业务域编码")
     private Long bizDomainId;
 
-    @ApiModelProperty(value = "可见性")
-    private VisibilityEnum visibility;
+    @ApiModelProperty(value = "所属权限组ID")
+    private Long authGroupId;
 
     @ApiModelProperty(value = "创建时间")
     private Date created;
