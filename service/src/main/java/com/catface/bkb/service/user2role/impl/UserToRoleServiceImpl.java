@@ -1,8 +1,11 @@
 package com.catface.bkb.service.user2role.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.common.enums.VisibilityEnum;
 import com.catface.bkb.repository.entity.Role;
 import com.catface.bkb.repository.entity.UserToRole;
+import com.catface.bkb.repository.entity.exd.UserToRoleExd;
+import com.catface.bkb.repository.param.QueryUserToRoleParam;
 import com.catface.bkb.repository.service.RoleRpService;
 import com.catface.bkb.repository.service.UserToRoleRpService;
 import com.catface.bkb.service.user2role.UserToRoleService;
@@ -67,12 +70,23 @@ public class UserToRoleServiceImpl implements UserToRoleService {
 
         // 检查用户绑定的角色是否属于当前客户
         Role role = roleRpService.getById(userToRole.getRoleId());
-        if (role.getVisibility()==VisibilityEnum.PRIVATE){
-            Assert.state(role.getClientId().equals(clientId),"对私有角色,仅支持解除自建角色");
+        if (role.getVisibility() == VisibilityEnum.PRIVATE) {
+            Assert.state(role.getClientId().equals(clientId), "对私有角色,仅支持解除自建角色");
         }
 
         // 执行解除动作
         userToRoleRpService.removeById(userToRoleId);
+    }
+
+    /**
+     * 分页查询用户和角色的绑定关系
+     *
+     * @param param 客户,用户,角色,业务域以及分页信息
+     * @return 用户和角色绑定列表
+     */
+    @Override
+    public Page<UserToRoleExd> queryOnePage(QueryUserToRoleParam param) {
+        return userToRoleRpService.queryOnePage(param);
     }
 
 

@@ -1,10 +1,14 @@
 package com.catface.bkb.http.web.controller.usr2role;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.catface.bkb.http.config.swagger.SwaggerTagConst;
+import com.catface.bkb.http.web.controller.usr2role.convert.UserToRoleWebConvert;
 import com.catface.bkb.http.web.controller.usr2role.reqeust.BindRoleToUserRequest;
 import com.catface.bkb.http.web.controller.usr2role.reqeust.GetUserToRoleRequest;
 import com.catface.bkb.http.web.controller.usr2role.reqeust.RemoveRoleFromUserRequest;
 import com.catface.bkb.http.web.controller.usr2role.response.UserToRoleResponse;
+import com.catface.bkb.repository.entity.exd.UserToRoleExd;
+import com.catface.bkb.repository.param.QueryUserToRoleParam;
 import com.catface.bkb.service.user2role.UserToRoleService;
 import com.catface.common.model.JsonResult;
 import com.catface.common.model.PageVO;
@@ -49,6 +53,9 @@ public class UserToRoleController {
     @ApiOperation(value = "分页查询用户和角色的绑定关系")
     @PostMapping(value = "/public/user2role/getOnePage")
     public JsonResult<PageVO<UserToRoleResponse>> getOnePage(@RequestBody @Valid GetUserToRoleRequest request) {
-        return JsonResult.success();
+        QueryUserToRoleParam param = UserToRoleWebConvert.convert(request);
+        Page<UserToRoleExd> page = userToRoleService.queryOnePage(param);
+        PageVO<UserToRoleResponse> pageVO = UserToRoleWebConvert.convert(page);
+        return JsonResult.success(pageVO);
     }
 }

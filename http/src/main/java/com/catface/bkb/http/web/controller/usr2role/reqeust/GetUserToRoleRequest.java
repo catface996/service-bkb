@@ -23,11 +23,12 @@ public class GetUserToRoleRequest extends PageRequest {
     @NotNull(message = "客户ID不能为空")
     private Long ctxClientId;
 
-    @ApiModelProperty(value = "待查看的用户ID", required = true, example = "121212")
-    @NotNull(message = "待查看的用户ID不能为空")
+    @ApiModelProperty(value = "待查看的用户ID", example = "121212")
     private Long userId;
 
-    @ApiModelProperty(value = "待查看的角色ID", required = true, example = "21212121")
-    @NotNull(message = "待查看的角色ID不能为空")
+    @ApiModelProperty(value = "待查看的角色ID", example = "21212121")
     private Long roleId;
+
+    @ApiModelProperty(value = "所属业务域ID")
+    private Long bizDomainId;
 }

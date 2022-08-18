@@ -21,7 +21,10 @@ public class UserToRoleResponse {
     private Long id;
 
     @ApiModelProperty(value = "业务域ID")
-    private String bizDomainId;
+    private Long bizDomainId;
+
+    @ApiModelProperty(value = "业务域名称")
+    private String bizDomainName;
 
     @ApiModelProperty(value = "用户ID")
     private Long userId;
@@ -34,6 +37,9 @@ public class UserToRoleResponse {
 
     @ApiModelProperty(value = "角色ID")
     private Long roleId;
+
+    @ApiModelProperty(value = "角色名称")
+    private String roleName;
 
     @ApiModelProperty(value = "创建人")
     private Long creator;

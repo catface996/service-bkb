@@ -4,7 +4,37 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, biz_domain_id, user_id, client_id, role_id, creator, created, updated, remark
+        id
+        , biz_domain_id, user_id, client_id, role_id, creator, created, updated, remark
     </sql>
+
+    <!-- 分页查询用户关联的角色 -->
+    <select id="selectOnePage" resultType="com.catface.bkb.repository.entity.exd.UserToRoleExd">
+        select
+        utr.id as id,
+        utr.biz_domain_id as bizDomainId,
+        bd.biz_domain_name as bizDomainName,
+        utr.user_id as userId,
+        utr.client_id as clientId,
+        utr.role_id as roleId,
+        r.role_name as roleName,
+        utr.creator as creator,
+        utr.created as created,
+        utr.updated as updated,
+        utr.remark as remark
+        from user_to_role utr
+            join role r on utr.role_id = r.id
+            join biz_domain bd on utr.biz_domain_id = bd.id
+        where utr.client_id = #{param.clientId}
+        <if test="param.userId!=null">
+            and utr.user_id = #{param.userId}
+        </if>
+        <if test="param.roleId!=null">
+            and utr.role_id = #{param.roleId}
+        </if>
+        <if test="param.bizDomainId!=null">
+            and utr.biz_domain_id = #{param.bizDomainId}
+        </if>
+    </select>
 
 </mapper>

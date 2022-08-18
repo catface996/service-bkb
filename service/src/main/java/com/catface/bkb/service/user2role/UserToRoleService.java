@@ -1,5 +1,9 @@
 package com.catface.bkb.service.user2role;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.catface.bkb.repository.entity.exd.UserToRoleExd;
+import com.catface.bkb.repository.param.QueryUserToRoleParam;
+
 /**
  * @author catface
  * @since 2022/8/14
@@ -23,5 +27,13 @@ public interface UserToRoleService {
      * @param clientId     执行当前操作的用户所属客户
      */
     void remove(Long userToRoleId, Long clientId);
+
+    /**
+     * 分页查询用户和角色的绑定关系
+     *
+     * @param param 客户,用户,角色,业务域以及分页信息
+     * @return 用户和角色绑定列表
+     */
+    Page<UserToRoleExd> queryOnePage(QueryUserToRoleParam param);
 
 }
